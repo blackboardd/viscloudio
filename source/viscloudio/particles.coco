@@ -12,7 +12,37 @@ from scipy.io import wavfile
 
 
 class setup_viscloudio(ShowBase):
+  '''
+  A class to setup the audio visualizer.
+
+  Attributes
+  ----------
+  audio_file: str
+    the audio file to be played
+
+  Methods
+  -------
+  load_particle_config(self, filename: str) -> None:
+    Loads the particle configurations from a given filename
+
+  setup_lights(self) -> None:
+    Creates an ambient light to illuminate the scene
+
+  setup_music(self, file: str) -> None:
+    Loads a sound file and begins looping playback
+
+  
+  '''
+
   def __init__(self, audio_file: str):
+    '''
+    Constructs all the necessary attributes for the scene.
+
+    Parameters
+    ----------
+    audio_file: str
+      the audio file to be played
+    '''
     ShowBase.__init__(self)
     ('escape', sys.exit) |*> self.accept
 
@@ -29,16 +59,44 @@ class setup_viscloudio(ShowBase):
     audio_file |> self.setup_music
 
   def load_particle_config(self, filename: str) -> None:
+    '''
+    Loads the particle configurations from a given filename
+
+    If the argument 'filename' is passed, the specified particle is loaded
+
+    Parameters
+    ----------
+    filename: str
+      filename to be loaded for use in particle emitter
+
+    Returns
+    -------
+    None
+    '''
     self.p.cleanup()
     self.p = ParticleEffect()
     filename |> Filename |> self.p.loadConfig
     self.p.start(parent = render, renderParent = render)
 
   def setup_lights(self) -> None:
+    '''
+    Creates an ambient light to illuminate the scene
+
+    Returns
+    -------
+    None
+    '''
     ambientLight = 'ambientLight' |> AmbientLight
     (0.4, 0.4, 0.35, 1.0) |> ambientLight.setColor
 
   def setup_music(self, file: str) -> None:
+    '''
+    Loads a sound file and begins looping playback
+
+    Returns
+    -------
+    None
+    '''
     self.m = file |> base.loader.loadSfx
     self.m.play()
 
