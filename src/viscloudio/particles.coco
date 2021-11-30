@@ -11,37 +11,37 @@ from scipy.fftpack import fft
 from scipy.io import wavfile
 
 
-class setup_viscloudio(ShowBase):
+class setupViscloudio(ShowBase):
   '''
   A class to setup the audio visualizer.
 
   Attributes
   ----------
-  audio_file: str
-    the audio file to be played
+  audioFile: str
+    The audio file to be played.
 
   Methods
   -------
-  load_particle_config(self, filename: str) -> None:
-    Loads the particle configurations from a given filename
+  loadParticleConfig(self, filename: str) -> None:
+    Loads the particle configurations from a given filename.
 
-  setup_lights(self) -> None:
-    Creates an ambient light to illuminate the scene
+  setupLights(self) -> None:
+    Creates an ambient light to illuminate the scene.
 
-  setup_music(self, file: str) -> None:
-    Loads a sound file and begins looping playback
+  setupMusic(self, file: str) -> None:
+    Loads a sound file and begins looping playback.
 
   
   '''
 
-  def __init__(self, audio_file: str):
+  def __init__(self, audioFile: str):
     '''
     Constructs all the necessary attributes for the scene.
 
     Parameters
     ----------
-    audio_file: str
-      the audio file to be played
+    audioFile: str
+      The audio file to be played.
     '''
     ShowBase.__init__(self)
     ('escape', sys.exit) |*> self.accept
@@ -53,21 +53,21 @@ class setup_viscloudio(ShowBase):
 
     base.enableParticles()
 
-    self.setup_lights()
+    self.setupLights()
     self.p = ParticleEffect()
-    'assets/shaders/steam.ptf' |> self.load_particle_config
-    audio_file |> self.setup_music
+    '../../assets/shaders/steam.ptf' |> self.loadParticleConfig
+    audioFile |> self.setupMusic
 
-  def load_particle_config(self, filename: str) -> None:
+  def loadParticleConfig(self, filename: str) -> None:
     '''
-    Loads the particle configurations from a given filename
+    Loads the particle configurations from a given filename.
 
-    If the argument 'filename' is passed, the specified particle is loaded
+    If the argument 'filename' is passed, the specified particle is loaded.
 
     Parameters
     ----------
     filename: str
-      filename to be loaded for use in particle emitter
+      Filename to be loaded for use in particle emitter.
 
     Returns
     -------
@@ -78,9 +78,9 @@ class setup_viscloudio(ShowBase):
     filename |> Filename |> self.p.loadConfig
     self.p.start(parent = render, renderParent = render)
 
-  def setup_lights(self) -> None:
+  def setupLights(self) -> None:
     '''
-    Creates an ambient light to illuminate the scene
+    Creates an ambient light to illuminate the scene.
 
     Returns
     -------
@@ -89,9 +89,9 @@ class setup_viscloudio(ShowBase):
     ambientLight = 'ambientLight' |> AmbientLight
     (0.4, 0.4, 0.35, 1.0) |> ambientLight.setColor
 
-  def setup_music(self, file: str) -> None:
+  def setupMusic(self, file: str) -> None:
     '''
-    Loads a sound file and begins looping playback
+    Loads a sound file and begins looping playback.
 
     Returns
     -------
@@ -100,4 +100,3 @@ class setup_viscloudio(ShowBase):
     self.m = file |> base.loader.loadSfx
     self.m.play()
 
-setup_viscloudio(audio_file = './assets/audio/drum_loop.ogg').run()

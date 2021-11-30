@@ -2,7 +2,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../dist/'))
 
 # -- Project information -----------------------------------------------------
 project = 'viscloudio'
@@ -26,4 +26,3 @@ autodoc_default_options = {
 
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'renku'
-html_static_path = ['_static']
