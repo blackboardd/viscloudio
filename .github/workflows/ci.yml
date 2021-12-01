@@ -67,14 +67,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/upload-artifact@v1
-        with:
-          name: DocumentationHTML
-          path: docs/build/html/
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
-          build-command: "sphinx-build -b html build"
+          build-command: "sphinx-build -b html docs/build"
       - uses: actions/checkout@v2
       - name: Commit documentation changes
         run: |

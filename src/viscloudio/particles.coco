@@ -74,6 +74,7 @@ class setupViscloudio(ShowBase):
     '''
     self.p.cleanup()
     self.p = ParticleEffect()
+
     filename |> Filename |> self.p.loadConfig
     self.p.start(parent = render, renderParent = render)
 
