@@ -1,3 +1,9 @@
+<div align="center">
+
+[![.github/workflows/ci.yml](https://github.com/blackboardd/viscloudio/actions/workflows/ci.yml/badge.svg)](https://github.com/blackboardd/viscloudio/actions/workflows/ci.yml)
+
+</div>
+
 <h1 align="center">☁️ Viscloudio</h1>
 
 ## 👠 Features
@@ -8,6 +14,10 @@
 - Has a basic graphical user interface
 
 ## 🧱 Stack
+
+- Python
+- Panda3D
+- SciPy
 
 ## Changelog
 
