@@ -5,7 +5,7 @@ on:
       - 'releases/**'
 
 jobs:
-  line-and-compile:
+  compile-lint:
 
     runs-on: ubuntu-latest
     strategy:
@@ -37,7 +37,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
   docs:
-    needs: [lint-and-compile]
+    needs: compile-lint
 
     runs-on: ubuntu-latest
 
@@ -63,7 +63,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
 
   release:
-    needs: [lint-and-compile, docs]
+    needs: [compile-lint, docs]
 
     runs-on: ubuntu-latest
     strategy:
