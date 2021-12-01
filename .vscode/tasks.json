@@ -4,7 +4,7 @@
     {
       "label": "docs",
       "type": "shell",
-      "command": "pushd docs && sphinx-build -b html ../dist _build && popd",
+      "command": "sphinx-build -b html src docs/_build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -13,7 +13,7 @@
     {
       "label": "install dependencies",
       "type": "shell",
-      "command": "pushd dist && poetry install && popd",
+      "command": "poetry install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -22,7 +22,7 @@
     {
       "label": "compile-format",
       "type": "shell",
-      "command": "coconut --minify src/viscloudio dist/viscloudio && python -m black dist/viscloudio",
+      "command": "coconut --minify src/viscloudio && python -m black src/viscloudio",
       "group": {
         "kind": "build",
         "isDefault": true
