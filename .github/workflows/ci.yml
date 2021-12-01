@@ -42,12 +42,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install necessary packages
-      run: python -m pip install renku-sphinx-theme
     - uses: ammaraskar/sphinx-action@master
       with:
         build-command: "sphinx-build -b html ../dist _build"
