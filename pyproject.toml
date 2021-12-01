@@ -1,7 +1,9 @@
 [tool.commitizen]
+version = '0.0.0'
 tag_format = 'v$major.$minor.$patch$prerelease'
 annotated_tag = true
 version_files = [
+  'pyproject.toml:tool.commitizen.version',
   'pyproject.toml:tool.poetry.version',
   'src/viscloudio/__version__.py:__version__'
 ]
@@ -98,7 +100,11 @@ build-backend = 'poetry.core.masonry.api'
 
 [tool.semantic_release]
 version_variable = 'src/viscloudio/__version__.py:__version__'
-version_toml = 'pyproject.toml:tool.poetry.version'
+version_toml = [
+  'pyproject.toml:tool.poetry.version',
+  'pyproject.toml:tool.commitizen.version'
+]
+
 branch = 'main'
 version_source = 'tag'
 upload_to_pypi = false
