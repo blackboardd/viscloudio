@@ -1,0 +1,5 @@
+[tool.semantic_release]
+version_variable = [
+    'dist/viscloudio/__init__.py:__version__',
+    'dist/pyproject.toml:tool.poetry.version',
+]
