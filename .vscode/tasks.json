@@ -20,15 +20,6 @@
       }
     },
     {
-      "label": "pytest",
-      "type": "shell",
-      "command": "pushd dist && python -m poetry run python -m pytest -v && popd",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      }
-    },
-    {
       "label": "install dependencies",
       "type": "shell",
       "command": "pushd dist && poetry install && popd",
