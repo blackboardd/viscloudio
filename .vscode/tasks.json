@@ -4,7 +4,7 @@
     {
       "label": "docs",
       "type": "shell",
-      "command": "./make.bat",
+      "command": "./make.bat html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -31,7 +31,7 @@
     {
       "label": "install dependencies",
       "type": "shell",
-      "command": "poetry install",
+      "command": "pushd dist && poetry install && popd",
       "group": {
         "kind": "build",
         "isDefault": true
