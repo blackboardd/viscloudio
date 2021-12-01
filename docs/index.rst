@@ -5,11 +5,12 @@ Welcome to viscloudio's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: viscloudio
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. automodule:: viscloudio
+.. automodule:: viscloudio.particles

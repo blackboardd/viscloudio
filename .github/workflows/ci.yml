@@ -31,7 +31,7 @@ jobs:
         run: python -m poetry run black src
       - uses: ammaraskar/sphinx-action@master
         with:
-          build-command: "sphinx-build -b html ../dist _build"
+          build-command: "sphinx-build -b html . _build"
           docs-folder: "docs/"
       - uses: actions/upload-artifact@v1
         with:
