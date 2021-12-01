@@ -25,4 +25,4 @@ autodoc_default_options = {
 }
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = 'renku'
+html_theme = 'bizstyle'
