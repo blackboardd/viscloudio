@@ -55,7 +55,7 @@ class setupViscloudio(ShowBase):
 
     self.setupLights()
     self.p = ParticleEffect()
-    '../../assets/shaders/steam.ptf' |> self.loadParticleConfig
+    '../assets/shaders/steam.ptf' |> self.loadParticleConfig
     audioFile |> self.setupMusic
 
   def loadParticleConfig(self, filename: str) -> None:
