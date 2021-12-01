@@ -9,6 +9,6 @@ Submodules
     particles
 """
 
-from .particles import *
+from viscloudio.particles import *
 
 __version__ = '0.0.1'
