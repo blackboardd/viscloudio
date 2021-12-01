@@ -1,19 +1,17 @@
 [tool.poetry]
 name = "viscloudio"
 version = "0.0.1"
-description = "Audio visualizer written in C++"
+description = ""
 authors = ["Brighten Tompkins <brightenqtompkins@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.11"
-Panda3D = "1.10.10"
-Sphinx = "^4.3.1"
+python = "^3.9"
+Panda3D = "^1.10.10"
 renku-sphinx-theme = "^0.2.2"
 scipy = "^1.7.3"
 matplotlib = "^3.5.0"
 coconut = "^1.6.0"
-Rx = "^3.2.0"
 
 [tool.poetry.dev-dependencies]
 
