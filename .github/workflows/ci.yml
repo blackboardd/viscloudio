@@ -30,6 +30,8 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
+      - name: source virtural environment
+          source .venv/bin/activate
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v2
@@ -68,7 +70,7 @@ jobs:
         run: |
           set -x
           find _gh-pages/ -mindepth 1 ! -path '_gh-pages/branch*' -delete
-          rsync -a _build _gh-pages
+          rsync -a docs/_build _gh-pages
       - name: Copy new build (branch)
         if: |
           contains(github.event_name, 'push') &&
@@ -79,7 +81,7 @@ jobs:
           brname="${brname##refs/heads/}"
           brdir=${brname//\//--}
           rm -rf   _gh-pages/branch/${brdir}
-          rsync -a _build _gh-pages/branch/${brdir}
+          rsync -a docs/_build _gh-pages/branch/${brdir}
       - name: Delete old feature branches
         if: ${{ github.event_name == 'push' }}
         run: |
