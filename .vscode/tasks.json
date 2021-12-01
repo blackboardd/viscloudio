@@ -27,6 +27,7 @@
         "kind": "test",
         "isDefault": true
       }
+    },
     {
       "label": "install dependencies",
       "type": "shell",

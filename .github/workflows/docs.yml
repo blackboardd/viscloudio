@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: generate html files for sphinx
         run: |
-          ./sphinx_make.bat html
+          ./make.bat html
