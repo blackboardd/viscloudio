@@ -2,18 +2,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "pytest",
-      "type": "shell",
-      "command": "python -m poetry run python -m pytest -v tests --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      }
-    },
-    {
       "label": "docs",
       "type": "shell",
-      "command": "./sphinx_make.bat clean && ./sphinx_make html",
+      "command": "./make.bat",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -22,12 +13,20 @@
     {
       "label": "coconut",
       "type": "shell",
-      "command": "coconut -w src/viscloudio dist/viscloudio",
+      "command": "coconut source/viscloudio dist/viscloudio",
       "group": {
         "kind": "build",
         "isDefault": true
       }
     },
+    {
+      "label": "pytest",
+      "type": "shell",
+      "command": "python -m poetry run python -m pytest -v tests --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
     {
       "label": "install dependencies",
       "type": "shell",
