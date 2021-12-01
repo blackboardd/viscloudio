@@ -42,11 +42,11 @@ jobs:
       - name: Install library
         run: poetry install --no-interaction
       - name: Compile coconut source
-        run: python -m poetry run coconut --minify src/viscloudio
+        run: coconut --minify src/viscloudio
       - name: Format with black
-        run: python -m poetry run black src
+        run: black src
       - name: Build docs
-        run: "python -m poetry run sphinx-build -b html docs docs/_build"
+        run: "sphinx-build -b html docs docs/_build"
       - uses: actions/upload-artifact@v1
         with:
           name: DocHTML
