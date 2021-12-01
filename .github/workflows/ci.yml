@@ -32,6 +32,7 @@ jobs:
           coconut src/viscloudio dist/viscloudio
 
   lint-and-test:
+    needs: coco
 
     runs-on: ubuntu-latest
     strategy:
@@ -61,6 +62,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
   docs:
+    needs: [coco, lint-and-test]
 
     runs-on: ubuntu-latest
 
@@ -93,6 +95,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
 
   release:
+    needs: [coco, lint-and-test, docs]
 
     runs-on: ubuntu-latest
     strategy:
