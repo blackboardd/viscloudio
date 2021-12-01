@@ -6,7 +6,6 @@ on:
 
 jobs:
   docs:
-    needs: coco
 
     runs-on: ubuntu-latest
 
