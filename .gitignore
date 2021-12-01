@@ -13,7 +13,8 @@ _autosummary
 .Python
 build/
 develop-eggs/
-dist/viscloudio/*
+src/viscloudio/*
+!*.coco
 !__init__.py
 downloads/
 eggs/
@@ -29,6 +30,9 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# Personal testing
+sandbox.coco
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
