@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+import sys
+
+from direct.particles.ParticleEffect import ParticleEffect
+from direct.showbase.ShowBase import ShowBase
+from panda3d.core import AmbientLight, Filename, LVector3
+from scipy.fftpack import fft
+from scipy.io import wavfile
+
+
+class setupViscloudio(ShowBase):
+  '''
+  A class to setup the audio visualizer.
+
+  Attributes
+  ----------
+  audioFile: str
+    The audio file to be played.
+
+  Methods
+  -------
+  loadParticleConfig(self, filename: str) -> None:
+    Loads the particle configurations from a given filename.
+
+  setupLights(self) -> None:
+    Creates an ambient light to illuminate the scene.
+
+  setupMusic(self, file: str) -> None:
+    Loads a sound file and begins looping playback.
+
+  
+  '''
+
+  def __init__(self, audioFile: str):
+    '''
+    Constructs all the necessary attributes for the scene.
+
+    Parameters
+    ----------
+    audioFile: str
+      The audio file to be played.
+    '''
+    ShowBase.__init__(self)
+    ('escape', sys.exit) |*> self.accept
+
+    base.disableMouse()
+    (0, -20, 0) |*> base.camera.setPos
+    90 |> base.camLens.setFov
+    (0, 0, 0) |*> base.setBackgroundColor
+
+    base.enableParticles()
+
+    self.setupLights()
+    self.p = ParticleEffect()
+    '../assets/shaders/steam.ptf' |> self.loadParticleConfig
+    audioFile |> self.setupMusic
+
+  def loadParticleConfig(self, filename: str) -> None:
+    '''
+    Loads the particle configurations from a given filename.
+
+    If the argument 'filename' is passed, the specified particle is loaded.
+
+    Parameters
+    ----------
+    filename: str
+      Filename to be loaded for use in particle emitter.
+
+    Returns
+    -------
+    None
+    '''
+    self.p.cleanup()
+    self.p = ParticleEffect()
+
+    filename |> Filename |> self.p.loadConfig
+    self.p.start(parent = render, renderParent = render)
+
+  def setupLights(self) -> None:
+    '''
+    Creates an ambient light to illuminate the scene.
+
+    Returns
+    -------
+    None
+    '''
+    ambientLight = 'ambientLight' |> AmbientLight
+    (0.4, 0.4, 0.35, 1.0) |> ambientLight.setColor
+
+  def setupMusic(self, file: str) -> None:
+    '''
+    Loads a sound file and begins looping playback.
+
+    Returns
+    -------
+    None
+    '''
+    self.m = file |> base.loader.loadSfx
+    self.m.play()
+
