@@ -22,7 +22,7 @@
     {
       "label": "pytest",
       "type": "shell",
-      "command": "python -m poetry run python -m pytest -v tests --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html",
+      "command": "pushd dist && python -m poetry run python -m pytest -v && popd",
       "group": {
         "kind": "test",
         "isDefault": true
