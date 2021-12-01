@@ -52,7 +52,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: DocHTML
-          path: docs/_build/
+          path: docs/_build
       - name: Clone old gh-pages
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -68,7 +68,7 @@ jobs:
         run: |
           set -x
           find _gh-pages/ -mindepth 1 ! -path '_gh-pages/branch*' -delete
-          rsync -a _build/ _gh-pages/
+          rsync -a _build _gh-pages
       - name: Copy new build (branch)
         if: |
           contains(github.event_name, 'push') &&
@@ -79,7 +79,7 @@ jobs:
           brname="${brname##refs/heads/}"
           brdir=${brname//\//--}
           rm -rf   _gh-pages/branch/${brdir}
-          rsync -a _build/ _gh-pages/branch/${brdir}
+          rsync -a _build _gh-pages/branch/${brdir}
       - name: Delete old feature branches
         if: ${{ github.event_name == 'push' }}
         run: |
