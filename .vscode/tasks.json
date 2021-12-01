@@ -20,9 +20,9 @@
       }
     },
     {
-      "label": "lint-and-compile",
+      "label": "compile-format",
       "type": "shell",
-      "command": "coconut --minify src/viscloudio dist/viscloudio && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics && flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics",
+      "command": "coconut --minify src/viscloudio dist/viscloudio && python -m black dist/viscloudio",
       "group": {
         "kind": "build",
         "isDefault": true

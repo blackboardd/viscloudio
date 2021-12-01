@@ -5,7 +5,7 @@ on:
       - 'releases/**'
 
 jobs:
-  compile-lint:
+  compile-format:
 
     runs-on: ubuntu-latest
     strategy:
@@ -24,20 +24,19 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Install necessary packages
         run: |
-          python -m pip install --upgrade poetry coconut flake8
+          python -m pip install --upgrade poetry coconut black
       - name: Install dependencies
         run: |
           pushd dist && poetry install && popd
       - name: compile python files
         run: |
           coconut --minify src/viscloudio dist/viscloudio
-      - name: Lint with flake8
+      - name: format with black
         run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          python -m black dist/viscloudio
 
   docs:
-    needs: compile-lint
+    needs: compile-format
 
     runs-on: ubuntu-latest
 
@@ -63,7 +62,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
 
   release:
-    needs: [compile-lint, docs]
+    needs: [compile-format, docs]
 
     runs-on: ubuntu-latest
     strategy:
