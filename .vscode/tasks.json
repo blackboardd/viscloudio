@@ -4,7 +4,7 @@
     {
       "label": "docs",
       "type": "shell",
-      "command": "sphinx-build -b html src docs/build",
+      "command": "pushd docs && sphinx-build -b html ../dist _build && popd",
       "group": {
         "kind": "build",
         "isDefault": true

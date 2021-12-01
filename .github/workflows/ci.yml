@@ -23,17 +23,13 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Install necessary packages
-        run: |
-          python -m pip install --upgrade poetry coconut black
+        run: python -m pip install --upgrade poetry coconut black
       - name: Install dependencies
-        run: |
-          pushd dist && poetry install && popd
+        run: pushd dist && poetry install && popd
       - name: compile python files
-        run: |
-          coconut --minify src/viscloudio dist/viscloudio
+        run: coconut --minify src/viscloudio dist/viscloudio
       - name: format with black
-        run: |
-          python -m black dist/viscloudio
+        run: python -m black dist/viscloudio
 
   docs:
     needs: compile-format
@@ -41,25 +37,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ammaraskar/sphinx-action@master
-        with:
-          build-command: "sphinx-build -b html src docs/build"
-      - uses: actions/checkout@v2
-      - name: Commit documentation changes
-        run: |
-          git clone https://github.com/ammaraskar/sphinx-action-test.git --branch gh-pages --single-branch gh-pages
-          cp -r docs/_build/html/* gh-pages/
-          cd gh-pages
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Update documentation" -a || true
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: gh-pages
-          directory: gh-pages
-          github_token: ${{ secrets.GH_TOKEN }}
+    - uses: actions/checkout@v2
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        build-command: "sphinx-build -b html ../dist _build"
+        docs-folder: "docs/"
+    - uses: actions/upload-artifact@v1
+      with:
+        name: DocumentationHTML
+        path: docs/_build/html/
+    - name: Commit documentation changes
+      run: |
+        git clone https://github.com/ammaraskar/sphinx-action-test.git --branch gh-pages --single-branch gh-pages
+        cp -r docs/_build/html/* gh-pages/
+        cd gh-pages
+        touch .nojekyll
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Update documentation" -a || true
+        # The above command will fail if no changes were present, so we ignore
+        # that.
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: gh-pages
+        directory: gh-pages
+        github_token: ${{ secrets.GH_TOKEN }}
 
   release:
     needs: [compile-format, docs]
@@ -84,3 +88,6 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           semantic-release publish
+
+
+
