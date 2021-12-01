@@ -13,7 +13,7 @@
     {
       "label": "coconut",
       "type": "shell",
-      "command": "coconut source/viscloudio dist/viscloudio",
+      "command": "coconut src/viscloudio dist/viscloudio",
       "group": {
         "kind": "build",
         "isDefault": true
