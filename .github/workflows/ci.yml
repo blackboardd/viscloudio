@@ -46,7 +46,9 @@ jobs:
       - name: Format with black
         run: poetry run black src
       - name: Build docs
-        run: poetry run sphinx-build -b html docs docs/_build
+        run: |
+          pip install sphinx
+          sphinx-build -b html docs docs/_build
       - uses: actions/upload-artifact@v1
         with:
           name: DocHTML
