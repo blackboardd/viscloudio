@@ -4,16 +4,7 @@
     {
       "label": "docs",
       "type": "shell",
-      "command": "./make.bat html",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    },
-    {
-      "label": "coconut",
-      "type": "shell",
-      "command": "coconut src/viscloudio dist/viscloudio",
+      "command": "sphinx-build -b html src docs/build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -29,9 +20,9 @@
       }
     },
     {
-      "label": "linter",
+      "label": "lint-and-compile",
       "type": "shell",
-      "command": "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics && flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics",
+      "command": "coconut --minify src/viscloudio dist/viscloudio && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics && flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics",
       "group": {
         "kind": "build",
         "isDefault": true

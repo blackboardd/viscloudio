@@ -5,7 +5,7 @@ on:
       - 'releases/**'
 
 jobs:
-  coco:
+  line-and-compile:
 
     runs-on: ubuntu-latest
     strategy:
@@ -22,55 +22,29 @@ jobs:
       - uses: abatilo/actions-poetry@v2.0.0
         with:
           poetry-version: ${{ matrix.poetry-version }}
+      - name: Install necessary packages
+        run: |
+          python -m pip install --upgrade poetry coconut flake8
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade poetry
           pushd dist && poetry install && popd
       - name: compile python files
         run: |
-          pip install coconut
-          coconut src/viscloudio dist/viscloudio
-
-  lint-and-test:
-    needs: coco
-
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9"]
-        poetry-version: [1.1.11]
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade poetry
-          pushd dist && poetry install && popd
+          coconut --minify src/viscloudio dist/viscloudio
       - name: Lint with flake8
         run: |
-          pip install flake8
-          # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
   docs:
-    needs: [coco, lint-and-test]
+    needs: [lint-and-compile]
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: ammaraskar/sphinx-action@master
         with:
-          docs-folder: "docs/"
-          build-command: "sphinx-build -b html build"
+          build-command: "sphinx-build -b html src docs/build"
       - uses: actions/checkout@v2
       - name: Commit documentation changes
         run: |
@@ -81,8 +55,6 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Update documentation" -a || true
-          # The above command will fail if no changes were present, so we ignore
-          # the return code.
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -91,7 +63,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
 
   release:
-    needs: [coco, lint-and-test, docs]
+    needs: [lint-and-compile, docs]
 
     runs-on: ubuntu-latest
     strategy:
