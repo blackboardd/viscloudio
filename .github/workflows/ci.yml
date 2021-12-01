@@ -5,6 +5,7 @@ on:
 
 jobs:
   compile-format-docs:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
 
     runs-on: ubuntu-latest
     strategy:
@@ -31,7 +32,7 @@ jobs:
         run: python -m poetry run black src
       - uses: ammaraskar/sphinx-action@master
         with:
-          build-command: "sphinx-build -b html . _build"
+          build-command: "sphinx-build -b html docs docs/_build"
           docs-folder: "docs/"
       - uses: actions/upload-artifact@v1
         with:
@@ -57,7 +58,6 @@ jobs:
 
   bump:
     needs: compile-format-docs
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
     steps:
       - name: Check out
