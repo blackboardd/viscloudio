@@ -3,7 +3,6 @@
 
 import sys
 
-import matplotlib.pyplot as plt
 from direct.particles.ParticleEffect import ParticleEffect
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import AmbientLight, Filename, LVector3
