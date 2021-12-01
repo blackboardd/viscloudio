@@ -2,15 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "docs",
-      "type": "shell",
-      "command": "sphinx-build -b html src docs/_build",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    },
-    {
       "label": "install dependencies",
       "type": "shell",
       "command": "poetry install",
@@ -20,9 +11,9 @@
       }
     },
     {
-      "label": "compile-format",
+      "label": "compile-format-docs",
       "type": "shell",
-      "command": "coconut --minify src/viscloudio && python -m black src/viscloudio",
+      "command": "python -m poetry run coconut --minify src/viscloudio && python -m poetry run black src && python -m poetry run sphinx-build -b html docs docs/_build",
       "group": {
         "kind": "build",
         "isDefault": true

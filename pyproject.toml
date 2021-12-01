@@ -1,9 +1,9 @@
 [tool.commitizen]
-tag_format = "v$major.$minor.$patch$prerelease"
+tag_format = 'v$major.$minor.$patch$prerelease'
 annotated_tag = true
 version_files = [
   'pyproject.toml:tool.poetry.version',
-  'viscloudio/__init__.py:__version__'
+  'src/viscloudio/__version__.py:__version__'
 ]
 
 [tool.mypy]
@@ -12,7 +12,7 @@ ignore_missing_imports = true
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
-files = "src"
+files = 'src'
 
 [tool.black]
 line-length = 80
@@ -57,10 +57,10 @@ keywords = [
 ]
 exclude = ['*.coco']
 classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9"
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9'
 ]
 
 [tool.poetry.dependencies]
@@ -68,23 +68,23 @@ python = '^3.6'
 
 Panda3D = '^1.10.10'
 scipy = '^1.7.3'
-poetry-core = "^1.0.7"
-virtualenv = "^20.10.0"
+poetry-core = '^1.0.7'
+virtualenv = '^20.10.0'
 
 [tool.poetry.dev-dependencies]
-black = "^21.11b1"
-coconut = "^1.6.0"
-poetry-dynamic-versioning = "^0.13.1"
+black = '^21.11b1'
+coconut = '^1.6.0'
+poetry-dynamic-versioning = '^0.13.1'
 
 [tool.isort]
 py_version = 36
-profile = "black"
+profile = 'black'
 force_single_line = true
 combine_as_imports = true
 lines_between_types = 1
 lines_after_imports = 2
-src_paths = ["src", "tests"]
-extend_skip = ["setup.py"]
+src_paths = ['src']
+extend_skip = ['setup.py']
 
 
 [tool.poetry-dynamic-versioning]
@@ -97,7 +97,7 @@ requires = ['poetry-core>=1.0.0', 'poetry-dynamic-versioning']
 build-backend = 'poetry.core.masonry.api'
 
 [tool.semantic_release]
-version_variable = 'viscloudio/__init__.py:__version__'
+version_variable = 'src/viscloudio/__version__.py:__version__'
 version_toml = 'pyproject.toml:tool.poetry.version'
 branch = 'main'
 version_source = 'tag'
