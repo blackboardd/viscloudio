@@ -48,7 +48,7 @@ jobs:
       - name: Build docs
         run: |
           pip install sphinx
-          sphinx-build -b html docs docs/_build
+          poetry run sphinx-build -b html docs docs/_build
       - uses: actions/upload-artifact@v1
         with:
           name: DocHTML
