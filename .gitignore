@@ -13,11 +13,6 @@ _autosummary
 .Python
 build/
 develop-eggs/
-src/viscloudio/*
-!*.coco
-!__version__.py
-!__main__.py
-!__init__.py
 downloads/
 eggs/
 .eggs/
