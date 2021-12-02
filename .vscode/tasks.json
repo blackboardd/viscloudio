@@ -13,7 +13,7 @@
     {
       "label": "compile-format-docs",
       "type": "shell",
-      "command": "python -m poetry run coconut --minify src/viscloudio && python -m poetry run black src && python -m poetry run sphinx-build -b html docs docs/_build",
+      "command": "python -m poetry run coconut --minify src/viscloudio && python -m poetry run black src && sphinx-build -b html docs docs/_build",
       "group": {
         "kind": "build",
         "isDefault": true
